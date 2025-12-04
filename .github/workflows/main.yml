@@ -1,0 +1,45 @@
+name: Deploy Static TaxBridge Website to Pages
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push events to the main branch
+  push:
+    branches: ["main"]
+  # Allows manual triggering from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions required for deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ensures that only one deployment job runs at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Job for deploying the content
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Step 2: Upload the website files as an artifact
+      - name: Setup Pages and Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Your static files (index.html, style.css, script.js) are in the root directory.
+          # We specify the current directory ('.') as the source for the artifact.
+          path: '.' 
+          
+      # Step 3: Deploy the artifact to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
