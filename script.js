@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const formMessage = document.getElementById('formMessage');
 
     // PLACEHOLDER: User needs to replace this with their deployed Web App URL
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwqkGF-dt4y9_lOxWQNE6TTE0HwQBLA1ZQfG3DKZ_nxAOrqx6tBCWLUGE0h-Qx_q3Nyrw/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwdfs4dMN67vuZGeGOmgknxBzaoWJWjBzWKE6yYu4SKlpkW4Fpa75vz7zIvrKYqK1Emgw/exec';
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
