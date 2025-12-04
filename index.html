@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TaxBridge | Smart Tax Solutions in Ireland</title>
-    <meta name="description" content="Professional tax consultancy in Ireland for individuals and small businesses. Expert advice on Form 12, Bookkeeping, and more.">
+    <meta name="description"
+        content="Professional tax consultancy in Ireland for individuals and small businesses. Expert advice on Form 12, Bookkeeping, and more.">
     <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
 
-    <!-- Header -->
+    <div class="scrolling-bar">
+        <div class="scrolling-content">
+            *** Don't wait!!! It's time to claim your tax return ***
+        </div>
+    </div>
+
     <header class="header">
         <div class="container header-container">
             <a href="#" class="logo">TaxBridge</a>
@@ -34,100 +44,145 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container hero-container">
             <div class="hero-content">
                 <h1>Smart Tax Solutions for Individuals and Small Businesses in Ireland</h1>
-                <p>Stress-free tax filing, full compliance, and clear advice tailored to your needs.</p>
-                <a href="#contact" class="btn btn-primary">Book a Free Consultation</a>
+                <p>Stress-free tax filing, full compliance, and clear advice tailored to your needs. Stop worrying about
+                    Revenue forms and start saving.</p>
             </div>
-            <div class="hero-image">
-                <!-- Abstract placeholder illustration -->
-                <div class="placeholder-illustration"></div>
+            <div class="hero-form-container">
+                <div class="hero-form-wrapper">
+                    <h2>Fill out the form</h2>
+                    <p>Our experts will contact you soon.</p>
+                    <form id="leadFormHero" class="hero-form">
+                        <div class="form-group">
+                            <label for="name_hero">Name *</label>
+                            <input type="text" id="name_hero" name="name" required placeholder="Your Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email_hero">Email *</label>
+                            <input type="email" id="email_hero" name="email" required placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone_hero">Phone *</label>
+                            <input type="tel" id="phone_hero" name="phone" required placeholder="08x xxx xxxx">
+                        </div>
+                        <div class="form-group">
+                            <label for="message_hero">Additional info (Optional)</label>
+                            <textarea id="message_hero" name="message" rows="3"
+                                placeholder="E.g., Form 12, Bookkeeping, Self-Assessment"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+                        <div id="formMessageHero" class="form-message"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <h2 class="section-title">Our Services</h2>
             <div class="services-grid">
                 <div class="service-card">
+                    <i class="fa-solid fa-file-invoice-dollar fa-2x" style="color: var(--accent-color);"></i>
                     <h3>Form 12 Submission</h3>
-                    <p>Expert assistance with completing and filing Form 12 for PAYE taxpayers to ensure you claim all tax credits.</p>
+                    <p>Expert assistance with completing and filing Form 12 for PAYE taxpayers to ensure you claim all
+                        tax credits and reliefs.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fa-solid fa-book-open-reader fa-2x" style="color: var(--accent-color);"></i>
                     <h3>Company Bookkeeping</h3>
-                    <p>Reliable ongoing bookkeeping services for small and medium businesses to keep your finances organized.</p>
+                    <p>Reliable ongoing bookkeeping services for small and medium businesses to keep your finances
+                        organized and compliant.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fa-solid fa-user-tie fa-2x" style="color: var(--accent-color);"></i>
                     <h3>Self-Assessment (Form 11)</h3>
-                    <p>Comprehensive support for self-employed individuals filing their annual income tax returns.</p>
+                    <p>Comprehensive support for self-employed individuals, freelancers, and proprietary directors filing
+                        their annual income tax returns.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fa-solid fa-money-check-dollar fa-2x" style="color: var(--accent-color);"></i>
                     <h3>PAYE & Payroll Support</h3>
-                    <p>Ensuring your payroll is accurate and compliant with the latest Revenue regulations.</p>
+                    <p>Ensuring your payroll is accurate, timely, and compliant with the latest Revenue regulations and
+                        changes.</p>
                 </div>
                 <div class="service-card">
+                    <i class="fa-solid fa-chart-line fa-2x" style="color: var(--accent-color);"></i>
                     <h3>VAT Registration & Returns</h3>
-                    <p>Guidance on VAT registration thresholds and timely filing of your VAT returns.</p>
+                    <p>Guidance on VAT registration thresholds, timely filing of your VAT returns, and advice on schemes.
+                    </p>
                 </div>
                 <div class="service-card">
+                    <i class="fa-solid fa-lightbulb fa-2x" style="color: var(--accent-color);"></i>
                     <h3>Business Start-Up Advice</h3>
-                    <p>Strategic tax planning and advice for new businesses to get off to the best possible start.</p>
+                    <p>Strategic tax planning, structure advice, and registration support for new businesses to get off
+                        to the best possible start.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
         <div class="container about-container">
             <div class="about-text">
                 <h2 class="section-title">About TaxBridge</h2>
-                <p>We are an Ireland-based tax consultancy dedicated to simplifying the complexities of the tax system. With deep expertise in local Revenue regulations, we help individuals, freelancers, and small businesses navigate their financial obligations with confidence.</p>
+                <p>We are an Ireland-based tax consultancy dedicated to simplifying the complexities of the tax system.
+                    With deep expertise in local Revenue regulations, we help individuals, freelancers, and small
+                    businesses navigate their financial obligations with confidence. Our mission is to ensure 
+                       **maximizing your tax efficiency**</p>
                 <ul class="about-list">
-                    <li>Ireland Revenue-compliant advice</li>
-                    <li>Transparent fees with no hidden costs</li>
-                    <li>Friendly, jargon-free explanations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Ireland Revenue-compliant advice</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Transparent fees with no hidden costs</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Friendly, jargon-free explanations</li>
+                    <li><i class="fa-solid fa-circle-check"></i> No Refund - No Fee</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
     <section id="why-choose-us" class="why-choose-us">
         <div class="container">
             <h2 class="section-title">Why Choose Us</h2>
             <div class="features-grid">
                 <div class="feature-block">
+                    <i class="fa-solid fa-graduation-cap fa-3x" style="color: var(--accent-color);"></i>
                     <h3>Ireland Tax Experts</h3>
-                    <p>Deep knowledge of the Irish tax system to maximize your compliance and savings.</p>
+                    <p>Deep knowledge of the Irish tax system and the latest Revenue guidelines to maximize your
+                        compliance and savings.</p>
                 </div>
                 <div class="feature-block">
+                    <i class="fa-solid fa-handshake fa-3x" style="color: var(--accent-color);"></i>
                     <h3>End-to-End Support</h3>
-                    <p>From initial filing to follow-up queries, we are with you every step of the way.</p>
+                    <p>From initial filing and advice to follow-up queries and audits, we are with you every step of the
+                        way.</p>
                 </div>
                 <div class="feature-block">
+                    <i class="fa-solid fa-rocket fa-3x" style="color: var(--accent-color);"></i>
                     <h3>Fast Response Times</h3>
-                    <p>We value your time and aim to respond to all queries within one business day.</p>
+                    <p>We value your time and aim to respond to all client queries promptly—guaranteed response within
+                        one business day.</p>
                 </div>
                 <div class="feature-block">
+                    <i class="fa-solid fa-lock fa-3x" style="color: var(--accent-color);"></i>
                     <h3>Secure Data Handling</h3>
-                    <p>Your financial data is handled with the utmost care and is fully GDPR compliant.</p>
+                    <p>Your sensitive financial data is handled with the utmost care, fully compliant with GDPR and data
+                        protection laws.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container contact-container">
             <div class="contact-text">
                 <h2 class="section-title">Get in Touch</h2>
-                <p>Share your details and we’ll get back to you within 1 business day.</p>
+                <p>Have a complex tax question or need a personalized quote? Fill out the form below or call us directly.
+                </p>
+                <p style="color: var(--heading-color); margin-top: 10px;">Phone: +353 899 777 898</p>
+                <p style="color: var(--heading-color);">Email: irelandtaxbridge@gmail.com</p>
             </div>
             <form id="leadForm" class="contact-form">
                 <div class="form-group">
@@ -143,28 +198,26 @@
                     <input type="tel" id="phone" name="phone" required placeholder="08x xxx xxxx">
                 </div>
                 <div class="form-group">
-                    <label for="message">Message (Optional)</label>
-                    <textarea id="message" name="message" rows="4" placeholder="How can we help you?"></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Briefly describe your tax needs."></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary btn-submit">Request Consultation</button>
+                <button type="submit" class="btn btn-primary btn-submit">Submit Query</button>
                 <div id="formMessage" class="form-message"></div>
             </form>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
                 <h3>TaxBridge</h3>
-                <p>Smart Tax Solutions.</p>
+                <p>Smart Tax Solutions for Ireland.</p>
             </div>
             <div class="footer-info">
-                <p>Based in Ireland</p>
-                <p>info@taxbridge.ie | +353 1 234 5678</p>
+                <p>irelandtaxbridge@gmail.com | +353 899 777 898</p>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 TaxBridge. All rights reserved.</p>
+                <p>&copy; 2025 TaxBridge. All rights reserved.</p>
                 <div class="footer-links">
                     <a href="#">Privacy Policy</a>
                     <a href="#">Terms & Conditions</a>
@@ -175,4 +228,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
