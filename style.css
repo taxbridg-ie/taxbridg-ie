@@ -243,7 +243,24 @@ section {
     border: 1px solid rgba(100, 255, 218, 0.3);
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+    box-shadow: 0 20px 50px -10px rgba(2, 12, 27, 0.9);
+    /* Deeper shadow */
+    animation: float 6s ease-in-out infinite;
+    /* Floating effect */
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .hero-form-wrapper h2 {
@@ -280,19 +297,27 @@ section {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 30px;
+    perspective: 1000px;
+    /* Enable 3D space */
 }
 
 .service-card {
     background: var(--bg-color);
     padding: 30px;
     border-radius: 8px;
-    transition: var(--transition);
+    transition: transform 0.1s ease-out, border-color 0.3s ease-in-out;
+    /* Faster transform for tilt */
     border: 1px solid transparent;
+    transform-style: preserve-3d;
+    /* vital for 3D children if any */
+    will-change: transform;
 }
 
 .service-card:hover {
-    transform: translateY(-5px);
+    /* transform is handled by JS now, but keep border hover */
     border-color: var(--accent-color);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+    /* Enhanced shadow on hover */
 }
 
 .service-card h3 {
