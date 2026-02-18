@@ -154,6 +154,14 @@ section {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--accent-color);
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
 }
 
 .nav-list {
