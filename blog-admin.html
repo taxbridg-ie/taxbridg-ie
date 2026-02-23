@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Admin | TaxBridge</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+<!-- ===================================
+     LOGIN SCREEN
+     Password: taxbridge2025
+     To change: update ADMIN_PASSWORD constant below in the <script> section
+     =================================== -->
+<div id="loginScreen" class="admin-login-screen">
+    <div class="admin-login-box">
+        <i class="fa-solid fa-shield-halved login-icon"></i>
+        <h2>TaxBridge Admin</h2>
+        <p>Enter the admin password to continue.</p>
+        <input type="password" id="passwordInput" placeholder="Enter password" onkeydown="if(event.key==='Enter')tryLogin()">
+        <button class="btn btn-primary" style="width:100%;margin-top:4px;" onclick="tryLogin()">
+            <i class="fa-solid fa-lock-open" style="margin-right:8px;"></i>Login
+        </button>
+        <p class="admin-login-error" id="loginError">Incorrect password. Please try again.</p>
+    </div>
+</div>
+
+<!-- ===================================
+     ADMIN PANEL (shown after login)
+     =================================== -->
+<div id="adminPanel" style="display:none;" class="admin-page">
+    <div class="admin-container">
+
+        <!-- Header -->
+        <div class="admin-header">
+            <h1><i class="fa-solid fa-gauge"></i> Blog Admin Panel</h1>
+            <button class="admin-logout-btn" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
+            </button>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab-btn active" onclick="switchTab('posts', this)">
+                <i class="fa-solid fa-newspaper"></i> Posts
+                <span class="admin-tab-badge" id="posts-count">7</span>
+            </button>
+            <button class="admin-tab-btn" onclick="switchTab('editor', this)">
+                <i class="fa-solid fa-pen-to-square"></i> New Post
+            </button>
+            <button class="admin-tab-btn" onclick="switchTab('submissions', this)">
+                <i class="fa-solid fa-comments"></i> Submissions
+                <span class="admin-tab-badge new" id="submissions-count">0</span>
+            </button>
+        </div>
+
+        <!-- TAB: Posts -->
+        <div id="tab-posts" class="admin-panel active">
+            <div class="admin-panel-header">
+                <h2>All Blog Posts</h2>
+                <button class="btn" style="font-size:0.85rem;padding:8px 16px;" onclick="switchTab('editor', document.querySelector('[onclick*=\"editor\"]'))">
+                    <i class="fa-solid fa-plus" style="margin-right:6px;"></i>New Post
+                </button>
+            </div>
+
+            <table class="admin-post-table" id="postsTable">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="postsTableBody">
+                    <!-- Static posts loaded by JS; dynamic posts appended below -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- TAB: Editor -->
+        <div id="tab-editor" class="admin-panel">
+            <div class="admin-editor">
+                <h2 id="editorTitle"><i class="fa-solid fa-pen-nib" style="color:var(--accent-color);margin-right:10px;"></i>New Post</h2>
+
+                <div class="admin-form-row">
+                    <div class="admin-form-group">
+                        <label>Post Title *</label>
+                        <input type="text" id="postTitle" placeholder="Enter post title..." oninput="autoSlug()">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Slug (URL-safe ID)</label>
+                        <input type="text" id="postSlug" placeholder="auto-generated-from-title">
+                    </div>
+                </div>
+
+                <div class="admin-form-row three">
+                    <div class="admin-form-group">
+                        <label>Category</label>
+                        <select id="postCategory">
+                            <option value="PAYE Workers">PAYE Workers</option>
+                            <option value="Self-Employed">Self-Employed</option>
+                            <option value="Business">Business</option>
+                            <option value="VAT">VAT</option>
+                            <option value="Deadlines">Deadlines</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Date</label>
+                        <input type="date" id="postDate">
+                    </div>
+                    <div class="admin-form-group">
+                        <label>Read Time</label>
+                        <input type="text" id="postReadTime" placeholder="e.g. 5 min read">
+                    </div>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Excerpt (shown on blog listing)</label>
+                    <textarea id="postExcerpt" rows="3" style="min-height:80px;" placeholder="A short 1-2 sentence summary of the post..."></textarea>
+                </div>
+
+                <div class="admin-form-group">
+                    <label>Content</label>
+                    <div class="admin-toolbar">
+                        <button class="toolbar-btn" onclick="insertMarkup('## ', '')">H2</button>
+                        <button class="toolbar-btn" onclick="insertMarkup('### ', '')">H3</button>
+                        <button class="toolbar-btn" onclick="insertMarkup('**', '**')"><strong>B</strong></button>
+                        <button class="toolbar-btn" onclick="insertMarkup('- ', '')">&#8226; List</button>
+                        <button class="toolbar-btn" onclick="insertMarkup('\n> ', '')">&#8220;Quote</button>
+                        <button class="toolbar-btn" onclick="insertMarkup('\n---\n', '')">&#8212; Rule</button>
+                        <span style="color:var(--text-color);font-size:0.75rem;margin-left:8px;align-self:center;">Markdown-style hints</span>
+                    </div>
+                    <textarea id="postContent" rows="16" placeholder="Write your post content here. Use ## for headings, **bold** for emphasis, - for bullet points...&#10;&#10;Example:&#10;## Introduction&#10;Your intro paragraph here.&#10;&#10;## Key Points&#10;- Point one&#10;- Point two"></textarea>
+                </div>
+
+                <div class="admin-editor-actions">
+                    <button class="btn btn-primary" onclick="savePost()">
+                        <i class="fa-solid fa-floppy-disk" style="margin-right:6px;"></i>Save Draft
+                    </button>
+                    <button class="btn" onclick="previewPost()">
+                        <i class="fa-solid fa-eye" style="margin-right:6px;"></i>Preview
+                    </button>
+                    <button class="btn" onclick="exportHTML()" style="border-color:#64b5f6;color:#64b5f6;">
+                        <i class="fa-solid fa-code" style="margin-right:6px;"></i>Export HTML
+                    </button>
+                    <button class="btn" onclick="clearEditor()" style="border-color:rgba(239,154,154,0.4);color:#ef9a9a;">
+                        <i class="fa-solid fa-xmark" style="margin-right:6px;"></i>Clear
+                    </button>
+                </div>
+
+                <div id="editorMessage" style="display:none;margin-top:14px;padding:12px 16px;border-radius:4px;font-size:0.88rem;"></div>
+
+                <!-- Export Area -->
+                <div class="admin-export-area" id="exportArea">
+                    <h3><i class="fa-solid fa-code" style="color:#64b5f6;margin-right:8px;"></i>Exported HTML</h3>
+                    <p>Copy the code below and save it as <code style="background:rgba(100,181,246,0.1);color:#64b5f6;padding:2px 6px;border-radius:3px;">blog-<span id="exportSlugHint">slug</span>.html</code> in your website folder. Then add a card for it in <code style="background:rgba(100,181,246,0.1);color:#64b5f6;padding:2px 6px;border-radius:3px;">blog.html</code>.</p>
+                    <textarea id="exportTextarea" readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: Submissions -->
+        <div id="tab-submissions" class="admin-panel">
+            <div class="admin-panel-header">
+                <h2>Question Submissions</h2>
+                <p style="font-size:0.83rem;color:var(--text-color);">
+                    <i class="fa-solid fa-circle-info" style="color:var(--accent-color);margin-right:5px;"></i>
+                    Questions also go to your Zoho CRM inbox. Click a question to mark as read.
+                </p>
+            </div>
+            <div id="submissionsList"></div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="admin-preview-overlay" id="previewOverlay" onclick="if(event.target===this)closePreview()">
+    <div class="admin-preview-modal">
+        <button class="admin-preview-close" onclick="closePreview()"><i class="fa-solid fa-xmark"></i></button>
+        <div class="admin-preview-content" id="previewContent"></div>
+    </div>
+</div>
+
+<script>
+/* ================================================
+   CONFIGURATION
+   To change the admin password, update the value below.
+   ================================================ */
+const ADMIN_PASSWORD = 'taxbridge2025';
+
+/* Static blog posts (matches blog.html cards) */
+const STATIC_POSTS = [
+    { title: 'How to Claim Your Full Tax Refund for 2021\u20132024', category: 'PAYE Workers', date: '15 Jan 2025', slug: 'tax-refund-guide', file: 'blog-tax-refund-guide.html' },
+    { title: 'The Rent Tax Credit Explained: Up to \u20ac1,500 Back in 2025', category: 'PAYE Workers', date: '10 Feb 2025', slug: 'rent-tax-credit', file: 'blog-rent-tax-credit.html' },
+    { title: 'Top 5 Tax Reliefs Most PAYE Workers Miss Out On', category: 'PAYE Workers', date: '28 Jan 2025', slug: 'paye-reliefs', file: 'blog-paye-reliefs.html' },
+    { title: 'Self-Employed in Ireland? Your Complete Guide to Form 11', category: 'Self-Employed', date: '5 Jan 2025', slug: 'form-11-guide', file: 'blog-form-11-guide.html' },
+    { title: 'Understanding VAT Registration in Ireland: Thresholds & Deadlines', category: 'VAT', date: '18 Dec 2024', slug: 'vat-registration', file: 'blog-vat-registration.html' },
+    { title: 'Starting a Business in Ireland: Your Tax Registration Checklist', category: 'Business', date: '2 Dec 2024', slug: 'startup-checklist', file: 'blog-startup-checklist.html' },
+    { title: 'Key Irish Tax Deadlines You Cannot Afford to Miss in 2025', category: 'Deadlines', date: '20 Nov 2024', slug: 'tax-deadlines-2025', file: 'blog-tax-deadlines-2025.html' }
+];
+
+/* ================================================
+   AUTH
+   ================================================ */
+function tryLogin() {
+    const val = document.getElementById('passwordInput').value;
+    if (val === ADMIN_PASSWORD) {
+        sessionStorage.setItem('tb_admin', '1');
+        showAdmin();
+    } else {
+        document.getElementById('loginError').style.display = 'block';
+        document.getElementById('passwordInput').value = '';
+        document.getElementById('passwordInput').focus();
+    }
+}
+
+function logout() {
+    sessionStorage.removeItem('tb_admin');
+    location.reload();
+}
+
+function showAdmin() {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminPanel').style.display = 'block';
+    renderPosts();
+    renderSubmissions();
+    updateCounts();
+    // Set today's date as default
+    document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+}
+
+/* ================================================
+   TABS
+   ================================================ */
+function switchTab(tabId, btn) {
+    document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.admin-tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('tab-' + tabId).classList.add('active');
+    if (btn) btn.classList.add('active');
+}
+
+/* ================================================
+   POSTS TABLE
+   ================================================ */
+function renderPosts() {
+    const tbody = document.getElementById('postsTableBody');
+    const dynamicPosts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+    let html = '';
+
+    // Static posts
+    STATIC_POSTS.forEach(post => {
+        html += `<tr>
+            <td class="post-title-cell">${escHtml(post.title)}</td>
+            <td><span class="admin-badge static">${escHtml(post.category)}</span></td>
+            <td>${escHtml(post.date)}</td>
+            <td><span class="admin-badge static">Static</span></td>
+            <td>
+                <div class="admin-action-btns">
+                    <a href="${escHtml(post.file)}" target="_blank" class="admin-action-btn view"><i class="fa-solid fa-eye"></i> View</a>
+                </div>
+            </td>
+        </tr>`;
+    });
+
+    // Dynamic posts
+    dynamicPosts.forEach((post, idx) => {
+        html += `<tr>
+            <td class="post-title-cell">${escHtml(post.title)}</td>
+            <td><span class="admin-badge dynamic">${escHtml(post.category || 'General')}</span></td>
+            <td>${escHtml(post.date || '')}</td>
+            <td><span class="admin-badge dynamic">Draft</span></td>
+            <td>
+                <div class="admin-action-btns">
+                    <button class="admin-action-btn edit" onclick="editPost(${idx})"><i class="fa-solid fa-pen"></i> Edit</button>
+                    <button class="admin-action-btn delete" onclick="deletePost(${idx})"><i class="fa-solid fa-trash"></i> Delete</button>
+                </div>
+            </td>
+        </tr>`;
+    });
+
+    tbody.innerHTML = html;
+    updateCounts();
+}
+
+function deletePost(idx) {
+    if (!confirm('Delete this post? This cannot be undone.')) return;
+    const posts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+    posts.splice(idx, 1);
+    localStorage.setItem('taxbridge_posts', JSON.stringify(posts));
+    renderPosts();
+}
+
+function editPost(idx) {
+    const posts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+    const post = posts[idx];
+    document.getElementById('postTitle').value = post.title || '';
+    document.getElementById('postSlug').value = post.slug || '';
+    document.getElementById('postCategory').value = post.category || 'General';
+    document.getElementById('postDate').value = post.dateISO || new Date().toISOString().split('T')[0];
+    document.getElementById('postReadTime').value = post.readTime || '';
+    document.getElementById('postExcerpt').value = post.excerpt || '';
+    document.getElementById('postContent').value = post.content || '';
+    document.getElementById('editorTitle').innerHTML = '<i class="fa-solid fa-pen-nib" style="color:var(--accent-color);margin-right:10px;"></i>Edit Post';
+    // Store index for update
+    document.getElementById('postTitle').dataset.editIdx = idx;
+    switchTab('editor', document.querySelectorAll('.admin-tab-btn')[1]);
+}
+
+/* ================================================
+   EDITOR
+   ================================================ */
+function autoSlug() {
+    const title = document.getElementById('postTitle').value;
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    document.getElementById('postSlug').value = slug;
+}
+
+function insertMarkup(before, after) {
+    const ta = document.getElementById('postContent');
+    const start = ta.selectionStart;
+    const end = ta.selectionEnd;
+    const selected = ta.value.substring(start, end);
+    ta.value = ta.value.substring(0, start) + before + selected + after + ta.value.substring(end);
+    ta.focus();
+    ta.selectionStart = ta.selectionEnd = start + before.length + selected.length + after.length;
+}
+
+function getFormData() {
+    const dateISO = document.getElementById('postDate').value;
+    const dateFormatted = dateISO ? new Date(dateISO).toLocaleDateString('en-IE', {day:'numeric',month:'short',year:'numeric'}) : '';
+    return {
+        title: document.getElementById('postTitle').value.trim(),
+        slug: document.getElementById('postSlug').value.trim() || 'new-post-' + Date.now(),
+        category: document.getElementById('postCategory').value,
+        date: dateFormatted,
+        dateISO: dateISO,
+        readTime: document.getElementById('postReadTime').value.trim(),
+        excerpt: document.getElementById('postExcerpt').value.trim(),
+        content: document.getElementById('postContent').value.trim()
+    };
+}
+
+function savePost() {
+    const data = getFormData();
+    if (!data.title) { showEditorMsg('Please enter a post title.', false); return; }
+
+    const posts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+    const editIdx = document.getElementById('postTitle').dataset.editIdx;
+
+    if (editIdx !== undefined && editIdx !== '') {
+        posts[parseInt(editIdx)] = data;
+        delete document.getElementById('postTitle').dataset.editIdx;
+        document.getElementById('editorTitle').innerHTML = '<i class="fa-solid fa-pen-nib" style="color:var(--accent-color);margin-right:10px;"></i>New Post';
+    } else {
+        posts.unshift(data);
+    }
+
+    localStorage.setItem('taxbridge_posts', JSON.stringify(posts));
+    renderPosts();
+    showEditorMsg('Post saved as draft successfully!', true);
+}
+
+function clearEditor() {
+    ['postTitle','postSlug','postExcerpt','postContent','postReadTime'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('postDate').value = new Date().toISOString().split('T')[0];
+    document.getElementById('postCategory').value = 'PAYE Workers';
+    delete document.getElementById('postTitle').dataset.editIdx;
+    document.getElementById('editorTitle').innerHTML = '<i class="fa-solid fa-pen-nib" style="color:var(--accent-color);margin-right:10px;"></i>New Post';
+    document.getElementById('exportArea').style.display = 'none';
+    document.getElementById('editorMessage').style.display = 'none';
+}
+
+function showEditorMsg(msg, success) {
+    const el = document.getElementById('editorMessage');
+    el.style.display = 'block';
+    el.style.background = success ? 'rgba(100,255,218,0.08)' : 'rgba(239,154,154,0.08)';
+    el.style.borderLeft = success ? '3px solid var(--accent-color)' : '3px solid #ef9a9a';
+    el.style.color = success ? 'var(--accent-color)' : '#ef9a9a';
+    el.textContent = msg;
+    setTimeout(() => el.style.display = 'none', 4000);
+}
+
+/* ================================================
+   PREVIEW MODAL
+   ================================================ */
+function previewPost() {
+    const data = getFormData();
+    const overlay = document.getElementById('previewOverlay');
+    const content = document.getElementById('previewContent');
+    content.innerHTML = `
+        <h2>${escHtml(data.title) || '(No title)'}</h2>
+        <div class="preview-meta">
+            <span><i class="fa-solid fa-folder" style="color:var(--accent-color);margin-right:5px;"></i>${escHtml(data.category)}</span>
+            <span><i class="fa-regular fa-calendar" style="color:var(--accent-color);margin-right:5px;"></i>${escHtml(data.date)}</span>
+            <span><i class="fa-regular fa-clock" style="color:var(--accent-color);margin-right:5px;"></i>${escHtml(data.readTime)}</span>
+        </div>
+        <div class="preview-excerpt">${escHtml(data.excerpt) || '(No excerpt)'}</div>
+        <div class="preview-body">${escHtml(data.content) || '(No content)'}</div>
+    `;
+    overlay.classList.add('open');
+}
+
+function closePreview() {
+    document.getElementById('previewOverlay').classList.remove('open');
+}
+
+/* ================================================
+   EXPORT HTML
+   ================================================ */
+function exportHTML() {
+    const data = getFormData();
+    if (!data.title) { showEditorMsg('Please enter a post title before exporting.', false); return; }
+
+    // Convert simple markdown-style content to HTML paragraphs
+    function contentToHTML(text) {
+        if (!text) return '<p>Content coming soon.</p>';
+        let html = '';
+        const lines = text.split('\n');
+        lines.forEach(line => {
+            const trimmed = line.trim();
+            if (trimmed.startsWith('## ')) {
+                html += '<h2>' + escHtml(trimmed.slice(3)) + '</h2>\n';
+            } else if (trimmed.startsWith('### ')) {
+                html += '<h3>' + escHtml(trimmed.slice(4)) + '</h3>\n';
+            } else if (trimmed.startsWith('- ')) {
+                html += '<li>' + escHtml(trimmed.slice(2)).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</li>\n';
+            } else if (trimmed.startsWith('> ')) {
+                html += '<div class="info-box highlight"><p>' + escHtml(trimmed.slice(2)) + '</p></div>\n';
+            } else if (trimmed === '---') {
+                html += '<hr style="border-color:#1e3a5f;margin:24px 0;">\n';
+            } else if (trimmed) {
+                html += '<p>' + escHtml(trimmed).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') + '</p>\n';
+            }
+        });
+        return html;
+    }
+
+    const generatedHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${escHtml(data.title)} | TaxBridge Ireland</title>
+    <meta name="description" content="${escHtml(data.excerpt)}">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="scrolling-bar"><div class="scrolling-content">*** Book Your Free Tax Consultation Today! Maximise your return for 2025 ***</div></div>
+<header class="header">
+    <div class="container header-container">
+        <a href="index.html" class="logo"><img src="TaxAssureLOGO.png" alt="TaxBridge Logo" class="logo-img"></a>
+        <nav class="nav">
+            <ul class="nav-list">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#why-choose-us" class="nav-link">Why Choose Us</a></li>
+                <li><a href="blog.html" class="nav-link" style="color:var(--accent-color);">Blog</a></li>
+                <li><a href="index.html#contact" class="nav-link btn-nav">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-btn" aria-label="Toggle Menu"><span></span><span></span><span></span></button>
+        </nav>
+    </div>
+</header>
+<section class="post-hero">
+    <div class="container">
+        <nav class="post-breadcrumb">
+            <a href="index.html">Home</a><span>/</span><a href="blog.html">Blog</a><span>/</span>
+            <span style="color:var(--heading-color);">${escHtml(data.title)}</span>
+        </nav>
+        <span class="post-category-badge">${escHtml(data.category)}</span>
+        <h1>${escHtml(data.title)}</h1>
+        <div class="post-meta-bar">
+            <span><i class="fa-regular fa-calendar"></i>${escHtml(data.date)}</span>
+            <span><i class="fa-regular fa-clock"></i>${escHtml(data.readTime)}</span>
+            <span><i class="fa-regular fa-user"></i>TaxBridge Team</span>
+        </div>
+    </div>
+</section>
+<section class="post-section">
+    <div class="container">
+        <div class="post-grid">
+            <article class="post-article">
+                ${contentToHTML(data.content)}
+                <div class="vote-widget">
+                    <h3>Was this article helpful?</h3>
+                    <div class="vote-buttons">
+                        <button class="vote-btn" id="vote-yes" onclick="castVote('${escHtml(data.slug)}', true)"><span>&#128077;</span> Yes, helpful</button>
+                        <button class="vote-btn" id="vote-no" onclick="castVote('${escHtml(data.slug)}', false)"><span>&#128078;</span> Not really</button>
+                    </div>
+                    <p class="vote-result" id="vote-result"></p>
+                </div>
+                <div class="ask-section">
+                    <h3><i class="fa-solid fa-comments"></i> Ask Our Tax Experts</h3>
+                    <p>Have a question? Our team replies within 1 business day.</p>
+                    <iframe name="hidden_ask_iframe_x" style="display:none;" onload="if(this.submitted){document.getElementById('ask-msg-x').style.display='block';document.getElementById('askFormX').reset();this.submitted=false;}"></iframe>
+                    <form id="askFormX" action="https://forms.zohopublic.eu/infotaxa1/form/leadformwebsite/formperma/5yFVON9iAPOysnHe0nxCU2Lr1qO7XXsKoVrfhXp4t_w/htmlRecords/submit" method="POST" target="hidden_ask_iframe_x" onsubmit="saveQuestion(this);document.querySelector('iframe[name=hidden_ask_iframe_x]').submitted=true;" accept-charset="UTF-8" enctype="multipart/form-data">
+                        <input type="hidden" name="zf_referrer_name" value=""><input type="hidden" name="zf_redirect_url" value=""><input type="hidden" name="zc_gad" value=""><input type="hidden" name="Name_Middle" value=""><input type="hidden" name="Dropdown" value="FORM 12">
+                        <div class="ask-form-row">
+                            <div class="form-group"><label>First Name *</label><input type="text" name="Name_First" required placeholder="First Name" maxlength="255"></div>
+                            <div class="form-group"><label>Email *</label><input type="email" name="Email" required placeholder="your@email.com" maxlength="255"></div>
+                        </div>
+                        <div class="form-group"><label>Your Question *</label><textarea name="MultiLine" rows="4" required placeholder="What would you like to know?" maxlength="65535"></textarea></div>
+                        <button type="submit" class="btn btn-primary">Send Question</button>
+                        <div class="ask-message" id="ask-msg-x">Thanks! Our team will reply within 1 business day.</div>
+                    </form>
+                </div>
+            </article>
+            <aside class="post-sidebar">
+                <div class="post-cta-widget">
+                    <i class="fa-solid fa-headset cta-icon"></i>
+                    <h3>Need Tax Help?</h3>
+                    <p>Our experts are ready to answer your questions. Book a free consultation today.</p>
+                    <a href="index.html#contact" class="btn btn-primary">Get Free Consultation</a>
+                </div>
+                <div class="post-sidebar-widget">
+                    <h3><i class="fa-solid fa-share-nodes"></i> Share This Article</h3>
+                    <div class="share-buttons">
+                        <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href).then(()=>alert('Link copied!'))"><i class="fa-solid fa-link"></i> Copy Link</button>
+                        <a class="share-btn linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https://taxbridge.ie/blog-${escHtml(data.slug)}.html" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container footer-container">
+        <div class="footer-brand"><h3>TaxBridge</h3><p>Smart Tax Solutions for Ireland.</p></div>
+        <div class="footer-info"><p>irishtaxbridge@gmail.com | +353 899 777 898</p></div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TaxBridge. All rights reserved.</p>
+            <div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms &amp; Conditions</a></div>
+        </div>
+    </div>
+</footer>
+<script src="script.js"><\/script>
+<script>
+document.querySelectorAll('.faq-question').forEach(btn=>{btn.addEventListener('click',function(){const item=this.closest('.faq-item');const isOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-answer').style.display='none';});if(!isOpen){item.classList.add('open');item.querySelector('.faq-answer').style.display='block';}});});
+const SLUG='${escHtml(data.slug)}';
+function castVote(slug,helpful){const key='taxbridge_voted_'+slug;if(localStorage.getItem(key))return;let votes=JSON.parse(localStorage.getItem('taxbridge_votes')||'{}');if(!votes[slug])votes[slug]={yes:0,no:0};helpful?votes[slug].yes++:votes[slug].no++;localStorage.setItem('taxbridge_votes',JSON.stringify(votes));localStorage.setItem(key,'1');showVoteResult(slug,helpful);}
+function showVoteResult(slug,voted){const votes=JSON.parse(localStorage.getItem('taxbridge_votes')||'{}')[slug]||{yes:0,no:0};const total=votes.yes+votes.no;const pct=total?Math.round((votes.yes/total)*100):0;document.getElementById('vote-result').innerHTML='<span>'+pct+'%<\/span> of readers found this helpful ('+total+' votes)';if(voted!==null){document.getElementById('vote-yes').classList.toggle('voted-yes',voted===true);document.getElementById('vote-no').classList.toggle('voted-no',voted===false);}document.getElementById('vote-yes').disabled=true;document.getElementById('vote-no').disabled=true;}
+(function(){if(localStorage.getItem('taxbridge_voted_'+SLUG))showVoteResult(SLUG,null);})();
+function saveQuestion(form){const questions=JSON.parse(localStorage.getItem('taxbridge_questions')||'[]');questions.unshift({name:form.Name_First.value,email:form.Email.value,question:form.MultiLine.value,post:'${escHtml(data.title)}',date:new Date().toLocaleDateString('en-IE'),status:'new'});localStorage.setItem('taxbridge_questions',JSON.stringify(questions));}
+<\/script>
+</body>
+</html>`;
+
+    document.getElementById('exportTextarea').value = generatedHTML;
+    document.getElementById('exportSlugHint').textContent = data.slug;
+    document.getElementById('exportArea').style.display = 'block';
+    document.getElementById('exportArea').scrollIntoView({ behavior: 'smooth' });
+}
+
+/* ================================================
+   SUBMISSIONS
+   ================================================ */
+function renderSubmissions() {
+    const questions = JSON.parse(localStorage.getItem('taxbridge_questions') || '[]');
+    const container = document.getElementById('submissionsList');
+    const badge = document.getElementById('submissions-count');
+    const unread = questions.filter(q => q.status === 'new').length;
+    badge.textContent = unread;
+    badge.style.display = unread > 0 ? 'inline-block' : 'none';
+
+    if (!questions.length) {
+        container.innerHTML = `<div class="admin-empty-state">
+            <i class="fa-regular fa-comment-dots"></i>
+            <p>No question submissions yet. They will appear here when readers use the Ask form on blog posts.</p>
+        </div>`;
+        return;
+    }
+
+    container.innerHTML = questions.map((q, idx) => `
+        <div class="submission-card ${q.status === 'new' ? 'unread' : 'read'}" onclick="markRead(${idx})">
+            <div class="submission-header">
+                <span class="submission-name">${escHtml(q.name)}</span>
+                <span class="admin-badge ${q.status === 'new' ? 'new-badge' : 'read-badge'}">${q.status === 'new' ? 'New' : 'Read'}</span>
+            </div>
+            <div class="submission-meta">
+                <i class="fa-regular fa-envelope" style="margin-right:5px;color:var(--accent-color);"></i>${escHtml(q.email)}
+                &nbsp;&nbsp;<i class="fa-regular fa-calendar" style="margin-right:5px;color:var(--accent-color);"></i>${escHtml(q.date)}
+                &nbsp;&nbsp;<i class="fa-solid fa-file-lines" style="margin-right:5px;color:var(--accent-color);"></i>${escHtml(q.post || 'Unknown post')}
+            </div>
+            <div class="submission-question">${escHtml(q.question)}</div>
+        </div>
+    `).join('');
+}
+
+function markRead(idx) {
+    const questions = JSON.parse(localStorage.getItem('taxbridge_questions') || '[]');
+    if (questions[idx]) {
+        questions[idx].status = 'read';
+        localStorage.setItem('taxbridge_questions', JSON.stringify(questions));
+        renderSubmissions();
+    }
+}
+
+/* ================================================
+   UTILITIES
+   ================================================ */
+function updateCounts() {
+    const dynamicPosts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+    document.getElementById('posts-count').textContent = STATIC_POSTS.length + dynamicPosts.length;
+    const questions = JSON.parse(localStorage.getItem('taxbridge_questions') || '[]');
+    const unread = questions.filter(q => q.status === 'new').length;
+    const badge = document.getElementById('submissions-count');
+    badge.textContent = unread;
+    badge.style.display = unread > 0 ? 'inline-block' : 'none';
+}
+
+function escHtml(str) {
+    if (str === null || str === undefined) return '';
+    return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ================================================
+   INIT
+   ================================================ */
+(function init() {
+    if (sessionStorage.getItem('tb_admin') === '1') {
+        showAdmin();
+    }
+})();
+</script>
+</body>
+</html>

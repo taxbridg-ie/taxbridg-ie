@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | TaxBridge Ireland – Tax Tips & Guides</title>
+    <meta name="description"
+        content="Expert tax tips, guides, and news for individuals and small businesses in Ireland. Stay informed on Revenue changes, reliefs, and deadlines.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Blog-specific styles */
+        .blog-hero {
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            padding-top: 140px;
+            background-image: linear-gradient(rgba(10, 25, 47, 0.88), rgba(10, 25, 47, 0.88)), url('Tax.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            text-align: center;
+        }
+
+        .blog-hero .hero-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            color: var(--white);
+            margin-bottom: 16px;
+            line-height: 1.15;
+        }
+
+        .blog-hero p {
+            font-size: 1.1rem;
+            color: var(--heading-color);
+        }
+
+        /* Blog Layout */
+        .blog-section {
+            background: var(--bg-color);
+            padding: 80px 0;
+        }
+
+        .blog-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 50px;
+            align-items: start;
+        }
+
+        /* Filter bar */
+        .blog-filter {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 7px 18px;
+            border-radius: 20px;
+            border: 1px solid #233554;
+            background: transparent;
+            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            border: 1px solid transparent;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .blog-card {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        /* Stretch the Read More link to cover the whole card */
+        .blog-card .blog-read-more::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .blog-card-badge {
+            display: inline-block;
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .blog-card-body {
+            padding: 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .blog-card-date {
+            font-size: 0.8rem;
+            color: var(--text-color);
+        }
+
+        .blog-card-date i {
+            margin-right: 5px;
+        }
+
+        .blog-card h2 {
+            font-size: 1.1rem;
+            color: var(--heading-color);
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .blog-card p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            line-height: 1.7;
+            flex: 1;
+        }
+
+        .blog-card-footer {
+            padding: 0 24px 24px;
+        }
+
+        .blog-read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent-color);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            margin-top: 16px;
+        }
+
+        .blog-read-more i {
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+
+        .blog-read-more:hover {
+            gap: 10px;
+        }
+
+        /* Featured Post */
+        .blog-featured {
+            background: var(--bg-light);
+            border-radius: 8px;
+            border: 1px solid rgba(100, 255, 218, 0.25);
+            padding: 36px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: center;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .blog-featured .blog-read-more::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        .blog-featured-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .blog-featured h2 {
+            font-size: 1.6rem;
+            color: var(--heading-color);
+            line-height: 1.3;
+            margin-bottom: 14px;
+        }
+
+        .blog-featured p {
+            color: var(--text-color);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .blog-featured-meta {
+            font-size: 0.82rem;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+
+        .blog-featured-meta span {
+            margin-right: 16px;
+        }
+
+        .blog-featured-visual {
+            background: linear-gradient(135deg, rgba(100, 255, 218, 0.08) 0%, rgba(100, 255, 218, 0.02) 100%);
+            border: 1px solid rgba(100, 255, 218, 0.15);
+            border-radius: 8px;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-featured-visual i {
+            font-size: 5rem;
+            color: rgba(100, 255, 218, 0.3);
+        }
+
+        /* Sidebar */
+        .blog-sidebar {
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-widget {
+            background: var(--bg-light);
+            border-radius: 8px;
+            border: 1px solid #1e3a5f;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .sidebar-widget h3 {
+            color: var(--heading-color);
+            font-size: 1rem;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #1e3a5f;
+        }
+
+        .sidebar-widget h3 i {
+            color: var(--accent-color);
+            margin-right: 8px;
+        }
+
+        /* Categories */
+        .category-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(35, 53, 84, 0.5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .category-list li:last-child {
+            border-bottom: none;
+        }
+
+        .category-list a {
+            color: var(--text-color);
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .category-list a:hover {
+            color: var(--accent-color);
+        }
+
+        .category-count {
+            background: rgba(100, 255, 218, 0.1);
+            color: var(--accent-color);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Recent posts sidebar */
+        .recent-post-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(35, 53, 84, 0.5);
+        }
+
+        .recent-post-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .recent-post-item a {
+            color: var(--heading-color);
+            font-size: 0.88rem;
+            line-height: 1.4;
+            transition: var(--transition);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .recent-post-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .recent-post-date {
+            font-size: 0.75rem;
+            color: var(--text-color);
+        }
+
+        /* Newsletter signup widget */
+        .sidebar-newsletter input[type="email"] {
+            width: 100%;
+            padding: 10px 12px;
+            background: var(--bg-color);
+            border: 1px solid #233554;
+            border-radius: 4px;
+            color: var(--heading-color);
+            font-family: var(--font-main);
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .sidebar-newsletter input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .sidebar-newsletter p {
+            font-size: 0.85rem;
+            color: var(--text-color);
+            margin-bottom: 14px;
+        }
+
+        .sidebar-newsletter .btn {
+            width: 100%;
+            text-align: center;
+            font-size: 0.88rem;
+            padding: 10px;
+        }
+
+        /* Deadline widget */
+        .deadline-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(35, 53, 84, 0.5);
+        }
+
+        .deadline-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .deadline-date {
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.2);
+            border-radius: 6px;
+            padding: 6px 10px;
+            text-align: center;
+            min-width: 52px;
+        }
+
+        .deadline-date .day {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            line-height: 1;
+        }
+
+        .deadline-date .month {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .deadline-info {
+            flex: 1;
+        }
+
+        .deadline-info p {
+            font-size: 0.85rem;
+            color: var(--heading-color);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .deadline-info span {
+            font-size: 0.75rem;
+            color: var(--text-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .blog-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-sidebar {
+                position: static;
+            }
+
+            .blog-featured {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-featured-visual {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .blog-hero h1 {
+                font-size: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scrolling-bar">
+        <div class="scrolling-content">
+            *** Book Your Free Tax Consultation Today! Maximise your return for 2025 ***
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <img src="TaxAssureLOGO.png" alt="TaxAssure Logo" class="logo-img">
+            </a>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#services" class="nav-link">Services</a></li>
+                    <li><a href="index.html#about" class="nav-link">About</a></li>
+                    <li><a href="index.html#why-choose-us" class="nav-link">Why Choose Us</a></li>
+                    <li><a href="blog.html" class="nav-link" style="color: var(--accent-color);">Blog</a></li>
+                    <li><a href="index.html#contact" class="nav-link btn-nav">Contact</a></li>
+                </ul>
+                <button class="mobile-menu-btn" aria-label="Toggle Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="blog-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Tax Tips & Guides</h1>
+                <p>Stay ahead of Revenue deadlines with expert insights on Irish tax reliefs, filing requirements, and
+                    money-saving strategies for individuals and businesses.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-section">
+        <div class="container">
+            <div class="blog-layout">
+
+                <!-- Main Content -->
+                <main>
+
+                    <!-- Featured Post -->
+                    <article class="blog-featured">
+                        <div>
+                            <p class="blog-featured-label"><i class="fa-solid fa-star" style="margin-right: 5px;"></i>
+                                Featured Article</p>
+                            <h2>How to Claim Your Full Tax Refund for 2021–2024: A Step-by-Step Guide</h2>
+                            <p class="blog-featured-meta">
+                                <span><i class="fa-regular fa-calendar" style="margin-right: 5px;"></i>15 January
+                                    2025</span>
+                                <span><i class="fa-regular fa-clock" style="margin-right: 5px;"></i>7 min read</span>
+                                <span class="blog-card-badge">PAYE Workers</span>
+                            </p>
+                            <p>Revenue allows you to claim tax back up to 4 years in arrears. Many PAYE workers are
+                                leaving hundreds — sometimes thousands — of euro on the table by not filing a Form 12.
+                                This guide walks you through exactly what you can claim and how our team makes the
+                                process effortless.</p>
+                            <a href="blog-tax-refund-guide.html" class="blog-read-more">Read Full Article <i
+                                    class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                        <div class="blog-featured-visual">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                    </article>
+
+                    <!-- Filter Bar -->
+                    <div class="blog-filter">
+                        <button class="filter-btn active">All Posts</button>
+                        <button class="filter-btn">PAYE Workers</button>
+                        <button class="filter-btn">Self-Employed</button>
+                        <button class="filter-btn">Business</button>
+                        <button class="filter-btn">VAT</button>
+                        <button class="filter-btn">Deadlines</button>
+                    </div>
+
+                    <!-- Blog Grid -->
+                    <div class="blog-grid">
+
+                        <!-- Post 1 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">PAYE Workers</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>10 Feb 2025</span>
+                                </div>
+                                <h2>The Rent Tax Credit Explained: Up to €1,500 Back in 2025</h2>
+                                <p>If you pay rent in Ireland you may be entitled to a significant tax credit. We break
+                                    down who qualifies, how much you can claim, and how to apply through Revenue's
+                                    myAccount portal.</p>
+                                <a href="blog-rent-tax-credit.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Post 2 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">PAYE Workers</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>28 Jan 2025</span>
+                                </div>
+                                <h2>Top 5 Tax Reliefs Most PAYE Workers Miss Out On</h2>
+                                <p>From flat-rate expenses for nurses and teachers to remote working relief and medical
+                                    expenses, discover the credits you are almost certainly not claiming — and how much
+                                    they are worth.</p>
+                                <a href="blog-paye-reliefs.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Post 3 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">Self-Employed</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>5 Jan 2025</span>
+                                </div>
+                                <h2>Self-Employed in Ireland? Your Complete Guide to Form 11</h2>
+                                <p>Form 11 is the annual tax return for self-employed individuals and proprietary
+                                    directors. We explain who must file, the filing deadline, what expenses you can
+                                    deduct, and why a tax agent can save you money.</p>
+                                <a href="blog-form-11-guide.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Post 4 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">VAT</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>18 Dec 2024</span>
+                                </div>
+                                <h2>Understanding VAT Registration in Ireland: Thresholds & Deadlines</h2>
+                                <p>Do you need to register for VAT? The current threshold for goods is €80,000 and
+                                    €40,000 for services. Learn when you must register, which VAT scheme suits your
+                                    business, and how to file your returns correctly.</p>
+                                <a href="blog-vat-registration.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Post 5 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">Business</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>2 Dec 2024</span>
+                                </div>
+                                <h2>Starting a Business in Ireland: Your Tax Registration Checklist</h2>
+                                <p>Setting up a new business involves several Revenue registrations — income tax, VAT,
+                                    employer PAYE, and more. Use our step-by-step checklist to make sure you are fully
+                                    compliant from day one.</p>
+                                <a href="blog-startup-checklist.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                        <!-- Post 6 -->
+                        <article class="blog-card">
+                            <div class="blog-card-body">
+                                <div class="blog-card-meta">
+                                    <span class="blog-card-badge">Deadlines</span>
+                                    <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>20 Nov 2024</span>
+                                </div>
+                                <h2>Key Irish Tax Deadlines You Cannot Afford to Miss in 2025</h2>
+                                <p>From the 31 October self-assessment deadline to monthly VAT return dates, missing a
+                                    Revenue filing can result in surcharges and interest. Here is a full calendar of
+                                    every important tax date for 2025.</p>
+                                <a href="blog-tax-deadlines-2025.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                            </div>
+                        </article>
+
+                    </div>
+                    <!-- /blog-grid -->
+
+                    <!-- Dynamic posts from admin panel (localStorage) -->
+                    <div id="dynamic-posts-section"></div>
+
+                </main>
+
+                <!-- Sidebar -->
+                <aside class="blog-sidebar">
+
+                    <!-- Categories -->
+                    <div class="sidebar-widget">
+                        <h3><i class="fa-solid fa-folder-open"></i>Categories</h3>
+                        <ul class="category-list">
+                            <li><a href="#">PAYE Workers</a><span class="category-count">3</span></li>
+                            <li><a href="#">Self-Employed</a><span class="category-count">1</span></li>
+                            <li><a href="#">Business</a><span class="category-count">1</span></li>
+                            <li><a href="#">VAT</a><span class="category-count">1</span></li>
+                            <li><a href="#">Deadlines</a><span class="category-count">1</span></li>
+                        </ul>
+                    </div>
+
+                    <!-- Tax Deadlines Widget -->
+                    <div class="sidebar-widget">
+                        <h3><i class="fa-solid fa-calendar-check"></i>Upcoming Deadlines</h3>
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <span class="day">19</span>
+                                <span class="month">Mar</span>
+                            </div>
+                            <div class="deadline-info">
+                                <p>Monthly PAYE/PRSI Return</p>
+                                <span>Employer monthly return</span>
+                            </div>
+                        </div>
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <span class="day">19</span>
+                                <span class="month">Apr</span>
+                            </div>
+                            <div class="deadline-info">
+                                <p>VAT3 Return (Bi-Monthly)</p>
+                                <span>Feb–Mar VAT period</span>
+                            </div>
+                        </div>
+                        <div class="deadline-item">
+                            <div class="deadline-date">
+                                <span class="day">31</span>
+                                <span class="month">Oct</span>
+                            </div>
+                            <div class="deadline-info">
+                                <p>Self-Assessment Deadline</p>
+                                <span>Form 11 filing & payment</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Newsletter -->
+                    <div class="sidebar-widget sidebar-newsletter">
+                        <h3><i class="fa-solid fa-envelope"></i>Tax Tips Newsletter</h3>
+                        <p>Get monthly tax tips, deadline reminders, and Revenue updates delivered to your inbox.</p>
+                        <input type="email" placeholder="your@email.com">
+                        <a href="index.html#contact" class="btn btn-primary">Subscribe</a>
+                    </div>
+
+                    <!-- Recent Posts -->
+                    <div class="sidebar-widget">
+                        <h3><i class="fa-solid fa-clock-rotate-left"></i>Recent Posts</h3>
+                        <div class="recent-post-item">
+                            <a href="blog-rent-tax-credit.html">The Rent Tax Credit Explained: Up to €1,500 Back in 2025</a>
+                            <span class="recent-post-date">10 Feb 2025</span>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="blog-paye-reliefs.html">Top 5 Tax Reliefs Most PAYE Workers Miss Out On</a>
+                            <span class="recent-post-date">28 Jan 2025</span>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="blog-form-11-guide.html">Self-Employed in Ireland? Your Complete Guide to Form 11</a>
+                            <span class="recent-post-date">5 Jan 2025</span>
+                        </div>
+                        <div class="recent-post-item">
+                            <a href="blog-vat-registration.html">Understanding VAT Registration in Ireland</a>
+                            <span class="recent-post-date">18 Dec 2024</span>
+                        </div>
+                    </div>
+
+                    <!-- CTA -->
+                    <div class="sidebar-widget" style="text-align: center; border-color: rgba(100, 255, 218, 0.25);">
+                        <i class="fa-solid fa-headset fa-2x" style="color: var(--accent-color); margin-bottom: 14px;"></i>
+                        <h3 style="border: none; margin-bottom: 8px;">Need Help With Your Taxes?</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-color); margin-bottom: 16px;">Our experts are
+                            ready to answer your questions. Book a free consultation today.</p>
+                        <a href="index.html#contact" class="btn btn-primary" style="font-size: 0.88rem;">Get Free
+                            Consultation</a>
+                    </div>
+
+                </aside>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h3>TaxBridge</h3>
+                <p>Smart Tax Solutions for Ireland.</p>
+            </div>
+            <div class="footer-info">
+                <p>irishtaxbridge@gmail.com | +353 899 777 898</p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 TaxBridge. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms & Conditions</a>
+                    <a href="blog-admin.html" style="opacity: 0.4; font-size: 0.75rem;">Admin</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Filter buttons
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Render dynamic posts from admin localStorage
+        (function renderDynamicPosts() {
+            const posts = JSON.parse(localStorage.getItem('taxbridge_posts') || '[]');
+            if (!posts.length) return;
+            const section = document.getElementById('dynamic-posts-section');
+            let html = '<h3 style="color:var(--heading-color);font-size:1.1rem;margin:40px 0 20px;padding-top:20px;border-top:1px solid #1e3a5f;">More Articles</h3>';
+            html += '<div class="blog-grid">';
+            posts.forEach(post => {
+                html += `<article class="blog-card">
+                    <div class="blog-card-body">
+                        <div class="blog-card-meta">
+                            <span class="blog-card-badge">${escapeHtml(post.category || 'General')}</span>
+                            <span class="blog-card-date"><i class="fa-regular fa-calendar"></i>${escapeHtml(post.date || '')}</span>
+                        </div>
+                        <h2>${escapeHtml(post.title)}</h2>
+                        <p>${escapeHtml(post.excerpt || '')}</p>
+                        <a href="blog-${escapeHtml(post.slug)}.html" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </article>`;
+            });
+            html += '</div>';
+            section.innerHTML = html;
+        })();
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        }
+    </script>
+</body>
+
+</html>

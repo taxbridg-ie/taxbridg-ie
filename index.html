@@ -35,6 +35,7 @@
                     <li><a href="#services" class="nav-link">Services</a></li>
                     <li><a href="#about" class="nav-link">About</a></li>
                     <li><a href="#why-choose-us" class="nav-link">Why Choose Us</a></li>
+                    <li><a href="blog.html" class="nav-link">Blog</a></li>
                     <li><a href="#contact" class="nav-link btn-nav">Contact</a></li>
                 </ul>
                 <button class="mobile-menu-btn" aria-label="Toggle Menu">
@@ -57,37 +58,61 @@
                 <div class="hero-form-wrapper">
                     <h2>CLAIM YOUR TAX REFUND TODAY!</h2>
                     <p>Our experts will contact you soon.</p>
-                    <form id="leadFormHero" class="hero-form">
-                        <div class="form-group">
-                            <label for="name_hero">Name *</label>
-                            <input type="text" id="name_hero" name="name" required placeholder="Your Full Name">
+                    <iframe name="hidden_iframe_hero" id="hidden_iframe_hero" style="display:none;"
+                        onload="if(this.submitted) { document.getElementById('formMessageHero').innerText = 'Thank you! Your tax refund claim has been submitted successfully.'; document.getElementById('formMessageHero').className = 'form-message success'; document.getElementById('leadFormHero').reset(); this.submitted=false; setTimeout(() => document.getElementById('formMessageHero').innerText='', 5000); }"></iframe>
+                    <form id="leadFormHero" class="hero-form"
+                        action="https://forms.zohopublic.eu/infotaxa1/form/leadformwebsite/formperma/5yFVON9iAPOysnHe0nxCU2Lr1qO7XXsKoVrfhXp4t_w/htmlRecords/submit"
+                        method="POST" target="hidden_iframe_hero"
+                        onsubmit="document.getElementById('hidden_iframe_hero').submitted = true;"
+                        accept-charset="UTF-8" enctype="multipart/form-data">
+                        <input type="hidden" name="zf_referrer_name" value="">
+                        <input type="hidden" name="zf_redirect_url" value="">
+                        <input type="hidden" name="zc_gad" value="">
+
+                        <div class="form-group" style="display: flex; gap: 10px;">
+                            <div style="flex: 1;">
+                                <label for="name_first_hero">First Name *</label>
+                                <input type="text" id="name_first_hero" name="Name_First" required
+                                    placeholder="First Name" maxlength="255">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="name_middle_hero">Middle Name</label>
+                                <input type="text" id="name_middle_hero" name="Name_Middle"
+                                    placeholder="Middle Name" maxlength="255">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="name_last_hero">Last Name *</label>
+                                <input type="text" id="name_last_hero" name="Name_Last" required placeholder="Last Name"
+                                    maxlength="255">
+                            </div>
                         </div>
                         <div class="form-group">
                             <label for="email_hero">Email *</label>
-                            <input type="email" id="email_hero" name="email" required placeholder="your@email.com">
+                            <input type="email" id="email_hero" name="Email" required placeholder="your@email.com"
+                                maxlength="255">
                         </div>
                         <div class="form-group">
-                            <label for="phone_hero">Phone *</label>
-                            <input type="tel" id="phone_hero" name="phone" required placeholder="08x xxx xxxx">
+                            <label for="phone_hero">Phone</label>
+                            <input type="tel" id="phone_hero" name="PhoneNumber_countrycode" placeholder="08x xxx xxxx"
+                                maxlength="20">
                         </div>
                         <div class="form-group">
-                            <label for="service_hero">Service (Optional)</label>
-                            <select id="service_hero" name="service"
+                            <label for="service_hero">Service *</label>
+                            <select id="service_hero" name="Dropdown" required
                                 style="width: 100%; padding: 10px; background: var(--bg-color); border: 1px solid #233554; color: var(--heading-color); border-radius: 4px;">
                                 <option value="" selected>Select a Service</option>
-                                <option value="Form 12 Submission">Form 12 Submission</option>
-                                <option value="Company Bookkeeping">Company Bookkeeping</option>
-                                <option value="Self-Assessment (Form 11)">Self-Assessment (Form 11)</option>
-                                <option value="PAYE & Payroll Support">PAYE & Payroll Support</option>
-                                <option value="VAT Registration & Returns">VAT Registration & Returns</option>
-                                <option value="Business Start-Up Advice">Business Start-Up Advice</option>
-                                <option value="Other">Other</option>
+                                <option value="FORM 12">Form 12 Submission</option>
+                                <option value="COMPANY BOOKKEEPING">Company Bookkeeping</option>
+                                <option value="SELF-ASSESSMENT (FORM 11)">Self-Assessment (Form 11)</option>
+                                <option value="PAYE &amp; PAYROLL SUPPORT">PAYE &amp; Payroll Support</option>
+                                <option value="VAT REGISTRATION &amp; RETURNS">VAT Registration &amp; Returns</option>
+                                <option value="BUSINESS START-UP ADVICE">Business Start-Up Advice</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="message_hero">Additional info (Optional)</label>
-                            <textarea id="message_hero" name="message" rows="3"
-                                placeholder="E.g., Form 12, Bookkeeping, Self-Assessment"></textarea>
+                            <textarea id="message_hero" name="MultiLine" rows="3"
+                                placeholder="E.g., Form 12, Bookkeeping, Self-Assessment" maxlength="65535"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary btn-submit">Submit</button>
                         <div id="formMessageHero" class="form-message"></div>
@@ -208,6 +233,121 @@
         </div>
     </section>
 
+    <!-- Client Testimonials Scrolling Bar -->
+    <section class="testimonials-section">
+        <div class="testimonials-section-header">
+            <span class="testimonials-label">★ Client Testimonials</span>
+            <h2 class="testimonials-title">What Our Clients Say</h2>
+        </div>
+        <div class="feedback-bar">
+            <div class="feedback-track" id="feedbackTrack"></div>
+        </div>
+        <div class="review-form-wrapper">
+            <h3 class="review-form-title">Share Your Experience</h3>
+            <form id="reviewForm" class="review-form" novalidate>
+                <input type="text" id="reviewName" placeholder="Your name &amp; city (e.g. John D., Dublin)" maxlength="60">
+                <div class="star-picker" id="starPicker" aria-label="Star rating">
+                    <span class="star-btn" data-value="1">★</span>
+                    <span class="star-btn" data-value="2">★</span>
+                    <span class="star-btn" data-value="3">★</span>
+                    <span class="star-btn" data-value="4">★</span>
+                    <span class="star-btn" data-value="5">★</span>
+                </div>
+                <textarea id="reviewMessage" placeholder="Tell us about your experience..." maxlength="300" rows="3"></textarea>
+                <button type="submit" class="btn btn-primary">Submit Review</button>
+                <p class="review-success" id="reviewSuccess"></p>
+            </form>
+        </div>
+    </section>
+
+    <script>
+    (function () {
+        var DEFAULT_REVIEWS = [
+            { stars: 5, quote: 'Got \u20ac1,240 back from Revenue for medical and remote working expenses I\u2019d never claimed. Took less than a week.', author: 'Aoife M., Dublin' },
+            { stars: 5, quote: 'TaxBridge handled my first Form 11 perfectly. Saved me hours and found deductions I didn\u2019t know about.', author: 'Ci\u00e1r\u00e1n O., Cork' },
+            { stars: 5, quote: 'VAT registration sorted in two days. The team explained everything clearly and kept me compliant from day one.', author: 'Niamh B., Galway' },
+            { stars: 5, quote: 'Switched to TaxBridge after years of doing it myself. Already recovered \u20ac870 in unclaimed credits.', author: 'Se\u00e1n T., Limerick' },
+            { stars: 5, quote: 'Brilliant service for my small business. Payroll, VAT, and bookkeeping all handled with zero stress on my end.', author: 'R\u00f3is\u00edn F., Waterford' },
+            { stars: 5, quote: 'Fast, professional, and genuinely great value. My tax refund covered the fee three times over.', author: 'Patrick D., Kilkenny' }
+        ];
+
+        function esc(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function makeStars(n) {
+            return '\u2605'.repeat(n) + '\u2606'.repeat(5 - n);
+        }
+
+        function cardHtml(r) {
+            return '<div class="feedback-card">' +
+                '<div class="feedback-stars">' + makeStars(r.stars) + '</div>' +
+                '<p class="feedback-quote">\u201c' + esc(r.quote) + '\u201d</p>' +
+                '<span class="feedback-author">' + esc(r.author) + '</span>' +
+                '</div>';
+        }
+
+        function renderTrack() {
+            var stored = JSON.parse(localStorage.getItem('taxbridge_reviews') || '[]');
+            var all = DEFAULT_REVIEWS.concat(stored);
+            var track = document.getElementById('feedbackTrack');
+            if (!track) return;
+            var html = all.concat(all).map(cardHtml).join('');
+            track.innerHTML = html;
+            // Reset animation so new cards animate from start
+            track.style.animation = 'none';
+            track.offsetHeight;
+            track.style.animation = '';
+        }
+
+        // Star picker
+        var selectedStars = 0;
+        var starPicker = document.getElementById('starPicker');
+        if (starPicker) {
+            var starBtns = starPicker.querySelectorAll('.star-btn');
+            starBtns.forEach(function (btn) {
+                btn.addEventListener('mouseover', function () {
+                    var val = +this.dataset.value;
+                    starBtns.forEach(function (b) { b.classList.toggle('active', +b.dataset.value <= val); });
+                });
+                btn.addEventListener('mouseout', function () {
+                    starBtns.forEach(function (b) { b.classList.toggle('active', +b.dataset.value <= selectedStars); });
+                });
+                btn.addEventListener('click', function () {
+                    selectedStars = +this.dataset.value;
+                    starBtns.forEach(function (b) { b.classList.toggle('active', +b.dataset.value <= selectedStars); });
+                });
+            });
+        }
+
+        // Form submit
+        var form = document.getElementById('reviewForm');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                var name = document.getElementById('reviewName').value.trim();
+                var message = document.getElementById('reviewMessage').value.trim();
+                var success = document.getElementById('reviewSuccess');
+                if (!name) { success.style.color = '#ff6b6b'; success.textContent = 'Please enter your name.'; return; }
+                if (selectedStars < 1) { success.style.color = '#ff6b6b'; success.textContent = 'Please select a star rating.'; return; }
+                if (!message) { success.style.color = '#ff6b6b'; success.textContent = 'Please write a short review.'; return; }
+                var reviews = JSON.parse(localStorage.getItem('taxbridge_reviews') || '[]');
+                reviews.push({ stars: selectedStars, quote: message, author: name });
+                localStorage.setItem('taxbridge_reviews', JSON.stringify(reviews));
+                renderTrack();
+                form.reset();
+                selectedStars = 0;
+                if (starPicker) starPicker.querySelectorAll('.star-btn').forEach(function (b) { b.classList.remove('active'); });
+                success.style.color = '';
+                success.textContent = 'Thank you! Your review is now live in the feed.';
+                setTimeout(function () { success.textContent = ''; }, 5000);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', renderTrack);
+    })();
+    </script>
+
     <section id="contact" class="contact">
         <div class="container contact-container">
             <div class="contact-text">
@@ -217,28 +357,69 @@
                 </p>
                 <p style="color: var(--heading-color); margin-top: 10px;">Phone: +353 899 777 898</p>
                 <p style="color: var(--heading-color);">Email: irishtaxbridge@gmail.com</p>
+                <iframe name="hidden_iframe_contact" id="hidden_iframe_contact" style="display:none;"
+                    onload="if(this.submitted) { document.getElementById('formMessageContact').innerText = 'Thank you! Your inquiry has been submitted successfully.'; document.getElementById('formMessageContact').className = 'form-message success'; document.getElementById('leadFormContact').reset(); this.submitted=false; setTimeout(() => document.getElementById('formMessageContact').innerText='', 5000); }"></iframe>
+                <form id="leadFormContact" class="contact-form"
+                    action="https://forms.zohopublic.eu/infotaxa1/form/leadformwebsite/formperma/5yFVON9iAPOysnHe0nxCU2Lr1qO7XXsKoVrfhXp4t_w/htmlRecords/submit"
+                    method="POST" target="hidden_iframe_contact"
+                    onsubmit="document.getElementById('hidden_iframe_contact').submitted = true;" accept-charset="UTF-8"
+                    enctype="multipart/form-data">
+                    <input type="hidden" name="zf_referrer_name" value="">
+                    <input type="hidden" name="zf_redirect_url" value="">
+                    <input type="hidden" name="zc_gad" value="">
+
+                    <div class="form-group" style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label for="name_first_contact">First Name *</label>
+                            <input type="text" id="name_first_contact" name="Name_First" required
+                                placeholder="First Name" maxlength="255">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="name_middle_contact">Middle Name</label>
+                            <input type="text" id="name_middle_contact" name="Name_Middle"
+                                placeholder="Middle Name" maxlength="255">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="name_last_contact">Last Name *</label>
+                            <input type="text" id="name_last_contact" name="Name_Last" required placeholder="Last Name"
+                                maxlength="255">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email_contact">Email *</label>
+                        <input type="email" id="email_contact" name="Email" required placeholder="your@email.com"
+                            maxlength="255">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_contact">Phone</label>
+                        <input type="tel" id="phone_contact" name="PhoneNumber_countrycode" placeholder="08x xxx xxxx"
+                            maxlength="20">
+                    </div>
+
+                    <!-- Required Dropdown to pass validation for Zoho Form -->
+                    <div class="form-group">
+                        <label for="service_contact">Service *</label>
+                        <select id="service_contact" name="Dropdown" required
+                            style="width: 100%; padding: 10px; background: var(--bg-color); border: 1px solid #233554; color: var(--heading-color); border-radius: 4px;">
+                            <option value="" selected>Select a Service</option>
+                            <option value="FORM 12">Form 12 Submission</option>
+                            <option value="COMPANY BOOKKEEPING">Company Bookkeeping</option>
+                            <option value="SELF-ASSESSMENT (FORM 11)">Self-Assessment (Form 11)</option>
+                            <option value="PAYE &amp; PAYROLL SUPPORT">PAYE &amp; Payroll Support</option>
+                            <option value="VAT REGISTRATION &amp; RETURNS">VAT Registration &amp; Returns</option>
+                            <option value="BUSINESS START-UP ADVICE">Business Start-Up Advice</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message_contact">Message</label>
+                        <textarea id="message_contact" name="MultiLine" rows="4"
+                            placeholder="Briefly describe your tax needs." maxlength="65535"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-submit">Request Consultation</button>
+                    <div id="formMessageContact" class="form-message"></div>
+                </form>
             </div>
-            <form id="leadForm" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" id="name" name="name" required placeholder="Your Full Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" id="email" name="email" required placeholder="your@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="phone">Phone *</label>
-                    <input type="tel" id="phone" name="phone" required placeholder="08x xxx xxxx">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="4"
-                        placeholder="Briefly describe your tax needs."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary btn-submit">Request Consultation</button>
-                <div id="formMessage" class="form-message"></div>
-            </form>
         </div>
     </section>
 

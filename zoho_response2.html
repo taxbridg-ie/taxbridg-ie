@@ -1,0 +1,184 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<meta http-equiv="x-ua-compatible" content="IE=edge" /><title>Zoho Forms</title>
+
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><link href="https://static.zohocdn.com/forms/images/favicon.f337ba4df49f92f0a9af92e5d6e998bf.ico" rel="shortcut icon">
+<link type="text/css" rel="stylesheet" href="https://static.zohocdn.com/forms/css/infopage.9f1fec09fd02328d173802afba31006b.css" />
+<!-- <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700italic,700,600italic,600,400italic,300italic,300" rel="stylesheet" type="text/css">-->
+<link href="https://webfonts.zoho.eu/css?family=Inter:300,400,500,600,700" rel="stylesheet" type="text/css">
+<style>
+.notFoundCont{text-align:center; margin-top:15%; margin-bottom:50px;} 
+.notFoundCont p{font-size:32px; font-weight:500; color:#222; margin-bottom:10px; margin-top:15px;} 
+.notFoundCont span{ font-size:16px;font-weight:400}
+.notFoundCont span a{ text-decoration:underline;}
+.notFoundIcon{ background:url(https://static.zohocdn.com/forms/images/sprite.cd4883ae8361398aaa9b97908d7c82ae.gif) no-repeat -418px -245px; width:83px; height:83px;}
+</style>
+
+<!-- Later, formsthirdpartyjs.js will be splitted. At that time, the below 4 files alone must be included, while loading from Static Server. -->
+<script type="text/javascript" src="https://static.zohocdn.com/forms/js/formsthirdpartyjs.5057e7a6658c5df4312fd62bcff12ed4.js"></script>
+<script type="text/javascript" src="https://static.zohocdn.com/forms/js/formscommon.5cb8fe52868a940a2d88a6c8f0c86b2d.js"></script><script>function previousPage(){
+window.history.back();
+}</script></head><body class="bodyBg">
+<!-- IAMUtil is used to get the Display name & Email id of the Current User -->
+
+<script>var i18nze = 
+{
+"zebold" : "Bold (Ctrl+B)", 
+"zeitalic" : "Italic (Ctrl+I)", 
+"zeunderline" : "Underline (Ctrl+U) ", 
+"zestrikethrough" : "Strikethrough ", 
+"zefontfamily" : "Font ", 
+"zefontsize" : "Font Size ", 
+"zefontcolor" : "Font color ", 
+"zebackcolor" : "Background Color ", 
+"zealignoptions" : "Fontstyle Options ", 
+"zelistoptions" : "List Options ", 
+"zedirectionoptions" : "Text Direction Options ", 
+"zequote" : "Insert Quote ", 
+"zeremoveformat" : "Remove Formatting ", 
+"zelink" : "Insert Link ", 
+"zetable" : "Insert Table ", 
+"zehorizontalrule" : "Insert Horizontal Rule ", 
+"zeimage" : "Insert Image ", 
+"zeobject" : "Insert HTML ", 
+"zecode" : "Insert Code ", 
+"zealignleft" : "Align Left (Ctrl+L) ", 
+"zealignright" : "Align Right (Ctrl+R) ", 
+"zejustify" : "Justify (Ctrl+J) ", 
+"zecenter" : "Center (Ctrl+E) ", 
+"zebullets" : "Bullets ", 
+"zenumbering" : "Numbering ", 
+"zeincreaseindent" : "Increase Indent ", 
+"zedecreaseindent" : "Decrease Indent ", 
+"zecheckspelling" : "Check Spelling ", 
+"zeplaintextmode" : "Plain Text Mode ", 
+"zertl" : "RTL ", 
+"zeltr" : "LTR ", 
+"zesmiley" : "Insert smiley ", 
+"zeunlink" : "Remove Link " 
+};</script>
+<script>var I18nPlaceHolders = {
+"zf.supportmail":"support@eu.zohoforms.com", 
+"zf.appname":"Zoho", 
+};</script>
+
+<script type="text/javascript" src="https://static.zohocdn.com/forms/js/i18njsmin/listingpage_i18nheader.1b90a4a40d3fbde19abc31d8020d735a.js"></script>
+<script type="text/javascript" src="https://static.zohocdn.com/forms/js/formsheader.bee30146a5ce3cab9ae32da3f573bb89.js"></script>
+<script src="https://static.zohocdn.com/ichat/js/Feb_04_2026_12527913_wmsbar.js"></script>
+<script type="text/javascript" src="https://static.zohocdn.com/forms/js/wmsnotifications.5a28f74905361d72091460bf85d25ea8.js"></script>
+<link rel="stylesheet" href="https://static.zohocdn.com/ichat/css/Feb_04_2026_12527913_wmsbar.css">
+<script type="text/javascript">$(document).ready(function() {
+ZFUtil.loadSvgIcons(["https://static.zohocdn.com/forms/svghtml/new_common_icons.e42312d503eee4a04978259a8028327e.html","https://static.zohocdn.com/forms/svghtml/header_icons.978bec48a0120fca8a4ed26c91791d73.html"]);
+// ZFPortal = new ZFPortal();
+//    ZFPortal.portalName='infotaxa1';
+ZFNotifications.notifications = new ZFNotifications();
+ZFFormHeader.header = new ZFFormHeader();
+
+});</script>
+<link href="https://static.zohocdn.com/forms/css/headerfiles.c9532e5b8cbd102591620bd02791bcfd.css" rel="stylesheet" type="text/css" />
+<div id="loadingDiv" class="loadingCont loadSuccess loadingLiveOverwrite topLoading" style="display:none;"><em class="sLoad"></em>
+<span>Loading...</span></div><div id="squareLoadingDiv" class="loadingCont loadSuccess loadingLiveOverwrite topLoading" style="display:none;"><em class="sLoad"></em> <span>Loading...</span></div><div id="shareFolderSuccessMsg" class="loadingCont loadSuccess sucessWithoutSload" style="display:none;">Form Already Saved</div><div class="topHeader"><!-- 'topHeader' class name must not be changed, as this div will only be shown when One Launcher page is getting displayed. --> <div class="logo-container"><div id="one-launcher-div" class="logoInnerCont" aria-label='Zoho Forms'>
+<a  href="/" id="home-link" class="logoContainer flLeft">
+
+<div class="zfLogo flLeft"><img href="/" src="https://static.zohocdn.com/forms/images/zfLogo.2db4172913ea3e9d482d67003de5e49d.png" /><span>Forms</span></div>
+</a>
+</div><div id="titleWrapper"  class="flLeft formTitleWrapper" style="display: none;"><div id="formTitleName" title="" class="titleName flLeft"></div><em style="display: none;" class="unSavedState flLeft" id="unSavedState">*</em></div><div id="reportTitleWrapper" class="formTitleWrapper zfReportHead" style="display: none;"><div id="hdrDiv" class="titleName"><a id="goToPrevPage" class="actionNavigate leftArrowIcon flLeft" style="display: none;"></a>
+<div class="flLeft mdlDropCont reportDropCont" id="reportLink"  reportlink="" elem_type="relatedRpts" onclick="ZFUtil.showRelatedReports()"><div id="formDispName" style="display:none;" formlink=""></div><div id="portalName" style="display:none;" portal=""></div><div  class="mdlDropHeader" ><span reportdispname="" class="reporttitlename" id="reportTitle" elem_type="relatedRpts" ></span> <em style="display:none;" class="unSavedState unSavedModify" id="unSavedState" elem_type="relatedRpts" >*</em>
+<icon class="icon-downArrow" onclick="ZFUtil.showRelatedReports()" elem_type="relatedRpts"></icon> 
+<!-- <span id="subtitle" class="subTitleName">All Entries</span> --></div></div><div class="mdlDropList" id="relatedReportsUL" style="display: none;" elem_type="relatedRpts"><!-- trimmedFormDispName is already encoded. If it is encoded again, then '>' sign will be converted to '&gt;'. -->
+<div class="mdlFmTitle" elem_type="relatedRpts"><span>Form: </span></div><ul><li onclick="ZFUtil.hideRelatedReports()"><a id="currentReportLink"></a></li></ul></div></div><!-- <div class="detal-lis-ico" onclick="ZFReportLive.refreshReportEntries();" title="Refresh" id="refreshReportEntriesDiv"><span class="refresh_icon_stop" id="refreshIconReport"> </span></div>-->
+<div class="clearBoth"></div></div></div>
+<div class="dim-div" style="display:none;"  id="deleteCoownerDiv"><div id="deleteCoownerDivCont" class="popupWrapper"><div class="popupHeaderWrapper"><h3 elname="deleteHeader" class="flLeft">Remove Collaborator</h3> 
+<div class="clearBoth"></div></div><div class="popupContainerWrapper statusCont"><p> Are you sure you want to remove this User as a Collaborator of this form?</p></div><div class="popupFotterWrapper">
+<button elname="confirmButton" class="red1 btnCurve">Yes, Delete</button>
+<button class="btnCurve lightGray" onclick="ZFCoownerUtil.cancelCoownerRemove(this);">Cancel</button>
+</div></div></div><div class="popUpOverlay" style=" display: none;" id="coownerNoPermission"><div class="pWrapper deleteWrapper zfCommonBdrRmve" style="width: 500px;" id="coownerNoPermissionCont" ><div class="pHeader"><svg class="icon"><use xlink:href="#icon-warning"></use></svg>
+<h4 class="colorRed">Permission Denied </h4></div><div class="pContainer"><p class="para">  You do not have sufficient permission to perform this action. Please contact your administrator. </p></div><div class="pFooter"><button href="javascript:;" class="btnCurve lightGray" onclick="removeNoPermPopup(this);">OK</button></div></div></div><div class="popNewOverlay refreshPopupDiv" id="reflectInfoPopup-div"><div class="popNewContainer popNewInfoCont" id="reflectInfoPopup-div-cont"><div class="popNewClose" onclick="ZFUtil.hideReloadPopup();"><a><svg class="icon delete_icon"><use xlink:href="#icon-close"></use></svg></a></div><div class="popNewHeader bdrGreen"><div class="popNewInfoIcon"></div><!-- <img src="../images/popnewinfo.svg" class="popNewInfoIcon" loading="lazy"> -->
+<h4>Refresh the page</h4></div><div class="popNewContentArea"><span class="popNewContentText">Changes are made in a different tab/window. Please refresh this page to proceed further.</span></div><div class="popNewFooter">
+<button onclick="ZFUtil.hideReloadPopup();">Cancel</button>
+
+<button class="greenBtnNew" onclick="ZFUtil.pageReload();">Refresh</button></div></div></div><div style="display:none;" class="popUpOverlay" id="formDataEncryptionProcessing-div" form_link_name="leadformwebsite">
+<div class="popUpOuter" id="formDataEncryptionProcessing-cont" style="width:500px;"><div class="popUpInner"><div class="popupMainCont messageCont"><div class="encryptLoad_Txt">Encryption in Progress<em>.</em><em>.</em><em>.</em></div><p class="encryptMsgTxt">No action can be performed on this form, as field encryption is in progress.</p>
+<div class="pActCont"><a class="blue btnCurve" href="/">
+Go to Home
+</a></div></div></div></div></div><div id="feedbackSuccessDiv" class="loadingCont loadSuccess sucessWithoutSload" style="display:none;">Mail sent.</div><div class="messageWrapper info accessDeniedBox" id="access-denied-div" style="display:none;"><div class="accessDeniedBoxInner"><div class="popNewInfoIcon"></div><p></p></div></div></div>
+<div id="darkLoadingDiv" style="display: none;" class="darkdim-div zfMainLoadingDim"><div id="darkLoadingDivCont"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div><div class="bounce4"></div></div></div></div><div style="display: none; z-index:99999" class="dim-div" id="restrictionPopup"><div style="width:450px; z-index:9999" class="informationWrapper" id="restrictionPopup-cont"><div class="popupHeaderWrapper"><h3 class="flLeft">AI Assistant </h3>
+<div class="clearBoth"></div></div><div class="popupContainerWrapper"><p class="statusCont" elname="message"></p></div><div class="popupFotterWrapper"><button elname="entries-cnt-info-a" class="blue btnCurve" onclick="hideRestrictionPopup(); event.stopPropagation();">OK</button></div></div></div><div class="popNewOverlay" id="ziaInfoPopupDimDiv" style="z-index: 99999;"><div class="popNewContainer popNewInfoCont" id="ziaInfoPopupDimCont" style="position: absolute; top: 247.201px; left: 539px;"><div class="popNewClose"><a onclick="ZFUtil.hideZIAInfoPopupDiv();">
+<svg class="icon delete_icon">
+<use xlink:href="#icon-close"></use>
+</svg>
+</a></div><div class="popNewHeader bdrGreen"><div class="popNewziaIcon"></div><h4>AI Assistant </h4></div><div class="popNewContentArea"><p class="popNewContentText">
+<span elname="errMsgSpan"></span> <b elname="errMsgBTag"></b>
+</p></div><div class="popNewFooter"><button class="btnCurve greenBtnNew" onclick="ZFUtil.hideZIAInfoPopupDiv();">OK</button></div></div></div><div class="popNewOverlay" id="ziaCreateOrgZiaAssistConfirmationPopupDimDiv" style="z-index: 99999;"><div class="popNewContainer popNewInfoCont" id="ziaCreateOrgZiaAssistConfirmationPopupDimCont" style="position: absolute; top: 247.201px; left: 539px;"><div class="popNewClose"><a elname="closeIcon">
+<svg class="icon delete_icon">
+<use xlink:href="#icon-close"></use>
+</svg>
+</a></div><div class="popNewHeader bdrGreen"><div class="popNewziaIcon"></div><h4>AI Assistant </h4></div><div class="popNewContentArea"><p class="popNewContentText">
+<span elname="errMsgSpan"> AI Assistant is not enabled for your organization. Please read and agree to the terms and conditions below to enable AI Assistant for accessing this feature and other AI-powered capabilities. <a target="_blank"
+href="https://help.zoho.com/portal/en/kb/forms/form-settings/compliance-audit/ai-assistant/articles/ai-assistant">
+Learn more
+</a> </span>
+<b elname="errMsgBTag"></b>
+</p>
+<div class="ziaTermsContainer" elname="ziaTermsContainer"><h4 class="ziaTermsTitle">Zoho Forms - AI Terms of Use</h4><div>These Zoho Forms AI Terms of Use (&quot;AI Terms&quot;) supplement <a href="https://www.zoho.com/terms.html" target="_blank">Zoho&apos;s General Terms of Service</a> and
+apply to your use of the AI-powered features made available within Zoho Forms (collectively, the &quot;Zoho Forms
+AI Features&quot;). By enabling, configuring, deploying or using Zoho Forms AI Features, you, on behalf of your
+organization (&quot;you&quot; &quot;your&quot;), agree to be bound by these AI Terms. If you do not agree to these terms, do not
+enable or use Zoho Forms AI Features. If there is a conflict between these AI Terms and <a href="https://www.zoho.com/terms.html" target="_blank">Zoho&apos;s
+General Terms of Service</a> or any other agreement signed between parties, these AI Terms will govern
+with respect to Zoho Forms AI Features.</div><div class="ziaTermsContent"><ul><li><b> 1. Admin Control:</b> Zoho Forms AI Features are optional. You may enable or disable specific AI
+features via the Zoho Forms admin console, subject to plan and configuration limitations.</li><li><b> 2. Experimental/Evolving Technology:</b> You acknowledge that Zoho Forms AI Features use
+artificial intelligence and may produce unexpected, incomplete, or inaccurate results. Any
+recommendations, summaries, replies, generated text, or other content produced by Zoho Forms AI
+Features is based on prompts or your data (&quot;AI Output&quot;). AI Output is not guaranteed to be correct,
+complete, or fit for any particular purpose.</li><li><b> 3. Administrator&apos;s Warranty on Lawful Basis: </b> You represent and warrant that you have a
+lawful basis for processing the data that you input into Zoho Forms AI Features. This includes,
+without limitation, obtaining all necessary permissions and consents from the data subjects to have
+their data shared with and processed by Zoho for the purpose of operating the Zoho Forms AI
+Features. You are solely responsible for providing any required privacy notices to data subjects.</li><li><b> 4. Customer Responsibilities: </b> You acknowledge and agree that you are responsible for:
+<div class="ziaTermsContentSubList"><ul ><li><b>a.</b>determining what data (including any prompts, documents, images) are accessible
+to each AI feature;</li><li><b>b.</b> reviewing any content generated before the content is used or shared with
+anyone;</li><li><b>c.</b>ensuring any email communications comply with applicable marketing, email, and
+privacy laws (including consent and opt-out requirements);</li><li><b>d.</b>verifying or validating any content generated, summaries, or recommendations before using them for any purposes including decision-making;</li><li><b>f.</b>complying with applicable laws.</li></ul></div></li><li><b> 5. Restrictions on Use: </b> In addition to any other restrictions imposed other applicable terms, you agrees to not:
+<div class="ziaTermsContentSubList"><ul ><li><b>a.</b>use Zoho Forms AI Features to generate, transmit, or store content that is unlawful, harmful, fraudulent, misleading, defamatory, discriminatory, or otherwise objectionable;</li><li><b>b.</b>use Zoho Forms AI Features for decisions that may create a high risk of physical or economic harm without appropriate human review (e.g., medical diagnosis, high-stakes financial recommendations);</li><li><b>c.</b>attempt to use Zoho Forms AI Features to create or disseminate malware, spam at scale, or abusive content;</li><li><b>d.</b>use Zoho Forms AI Features to reverse engineer, extract training data from, or benchmark Zoho Forms AI Features;</li><li><b>e.</b>input special categories of personal data (such as health, biometric, or sensitive financial data) except where strictly necessary and lawfully justified under applicable data protection laws; or</li><li><b>f.</b>circumvent any usage limits, security controls, or safety systems embedded in Zoho Forms AI Features.</li></ul></div></li><li><b> 6. Accuracy, Quality and Reliability of AI Outputs: </b> You understand that any AI Outputs may not always be accurate or reliable. They are provided for informational or assistive purposes and may contain errors, omissions, or biases. You should exercise your own judgment and expertise when using AI-generated information and not rely solely on it for critical decisions. You understand that when a feature is used to summarize information, the summaries generated may omit details, misinterpret nuance, or fail to capture all key points. You must refer to the original content when precision is required.</li><li><b> 7. Intellectual Property: </b> Zoho does not own or claim copyright over any content generated by its own large language model. You are solely responsible for reviewing any AI-generated content and AI Output to ensure it does not violate third-party rights.</li><li><b> 8. Limitation of Liability: </b> ZOHO MAKES NO GUARANTEES REGARDING THE PERFORMANCE, QUALITY, OR SUITABILITY OF THE AI-GENERATED RESPONSES, AI OUTPUT , OR ZOHO FORMS AI FEATURES. TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL ZOHO OR ITS AFFILIATES, OFFICERS, OR EMPLOYEES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR GOODWILL, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF ZOHO FORMS AI FEATURES. THIS INCLUDES, BUT IS NOT LIMITED TO, DAMAGES RESULTING FROM INACCURATE OR HARMFUL INFORMATION PROVIDED BY THE AI, REPUTATIONAL HARM, OR ANY DISPUTE BETWEEN YOU, YOUR CUSTOMER OR ANY OTHER PARTY.</li><li><b> 9. Feedback: </b> If you provide any feedback, suggestions, or comments regarding Zoho Forms AI Feature, you grant Zoho a perpetual, irrevocable, worldwide, royalty-free license to use, reproduce, modify, and incorporate such feedback into any of our products and services without restriction or compensation to you.</li><li><b> 10. Modification and Termination: </b> Zoho reserves the right to modify these AI Terms at any time. We also reserve the right to suspend or terminate your access to Zoho Forms AI Features at any time, for any reason, including for violation of these AI Terms.</li></ul></div><div>By using Zoho Forms and its AI features, you indicate that you have read and understood these terms and agree to comply with them.</div></div></div><div class="popNewFooter"><button class="btnCurve greenBtnNew" elname="okButton">Proceed</button></div></div></div><div class="popNewOverlay" id="ziaCreatZiaAssistEnableConfirmationPopupDimDiv" style="z-index: 99999;"><div class="popNewContainer popNewInfoCont" elname="ziaCreatZiaAssistEnableConfirmationPopupDimDiv" style="position: absolute; top: 247.201px; left: 539px;"><div class="popNewClose"><a elname="closeIcon">
+<svg class="icon delete_icon">
+<use xlink:href="#icon-close"></use>
+</svg>
+</a></div><div class="popNewHeader bdrGreen"><div class="popNewziaIcon"></div><h4>AI Assistant </h4></div><div class="popNewContentArea"><p class="popNewContentText">
+<span elname="errMsgSpan"> You're about to activate AI Assistant. To proceed, please read and agree to the terms and conditions below. Once activated, you can use AI-powered form creation, content generation, translations, auto-fill via Smart Scan, and other AI features across your organization. </span>
+<b elname="errMsgBTag"></b>
+</p>
+<div class="ziaTermsContainer" elname="ziaTermsContainer"><h4 class="ziaTermsTitle">Zoho Forms - AI Terms of Use</h4><div>These Zoho Forms AI Terms of Use (&quot;AI Terms&quot;) supplement <a href="https://www.zoho.com/terms.html" target="_blank">Zoho&apos;s General Terms of Service</a> and
+apply to your use of the AI-powered features made available within Zoho Forms (collectively, the &quot;Zoho Forms
+AI Features&quot;). By enabling, configuring, deploying or using Zoho Forms AI Features, you, on behalf of your
+organization (&quot;you&quot; &quot;your&quot;), agree to be bound by these AI Terms. If you do not agree to these terms, do not
+enable or use Zoho Forms AI Features. If there is a conflict between these AI Terms and <a href="https://www.zoho.com/terms.html" target="_blank">Zoho&apos;s
+General Terms of Service</a> or any other agreement signed between parties, these AI Terms will govern
+with respect to Zoho Forms AI Features.</div><div class="ziaTermsContent"><ul><li><b> 1. Admin Control:</b> Zoho Forms AI Features are optional. You may enable or disable specific AI
+features via the Zoho Forms admin console, subject to plan and configuration limitations.</li><li><b> 2. Experimental/Evolving Technology:</b> You acknowledge that Zoho Forms AI Features use
+artificial intelligence and may produce unexpected, incomplete, or inaccurate results. Any
+recommendations, summaries, replies, generated text, or other content produced by Zoho Forms AI
+Features is based on prompts or your data (&quot;AI Output&quot;). AI Output is not guaranteed to be correct,
+complete, or fit for any particular purpose.</li><li><b> 3. Administrator&apos;s Warranty on Lawful Basis: </b> You represent and warrant that you have a
+lawful basis for processing the data that you input into Zoho Forms AI Features. This includes,
+without limitation, obtaining all necessary permissions and consents from the data subjects to have
+their data shared with and processed by Zoho for the purpose of operating the Zoho Forms AI
+Features. You are solely responsible for providing any required privacy notices to data subjects.</li><li><b> 4. Customer Responsibilities: </b> You acknowledge and agree that you are responsible for:
+<div class="ziaTermsContentSubList"><ul ><li><b>a.</b>determining what data (including any prompts, documents, images) are accessible
+to each AI feature;</li><li><b>b.</b> reviewing any content generated before the content is used or shared with
+anyone;</li><li><b>c.</b>ensuring any email communications comply with applicable marketing, email, and
+privacy laws (including consent and opt-out requirements);</li><li><b>d.</b>verifying or validating any content generated, summaries, or recommendations before using them for any purposes including decision-making;</li><li><b>f.</b>complying with applicable laws.</li></ul></div></li><li><b> 5. Restrictions on Use: </b> In addition to any other restrictions imposed other applicable terms, you agrees to not:
+<div class="ziaTermsContentSubList"><ul ><li><b>a.</b>use Zoho Forms AI Features to generate, transmit, or store content that is unlawful, harmful, fraudulent, misleading, defamatory, discriminatory, or otherwise objectionable;</li><li><b>b.</b>use Zoho Forms AI Features for decisions that may create a high risk of physical or economic harm without appropriate human review (e.g., medical diagnosis, high-stakes financial recommendations);</li><li><b>c.</b>attempt to use Zoho Forms AI Features to create or disseminate malware, spam at scale, or abusive content;</li><li><b>d.</b>use Zoho Forms AI Features to reverse engineer, extract training data from, or benchmark Zoho Forms AI Features;</li><li><b>e.</b>input special categories of personal data (such as health, biometric, or sensitive financial data) except where strictly necessary and lawfully justified under applicable data protection laws; or</li><li><b>f.</b>circumvent any usage limits, security controls, or safety systems embedded in Zoho Forms AI Features.</li></ul></div></li><li><b> 6. Accuracy, Quality and Reliability of AI Outputs: </b> You understand that any AI Outputs may not always be accurate or reliable. They are provided for informational or assistive purposes and may contain errors, omissions, or biases. You should exercise your own judgment and expertise when using AI-generated information and not rely solely on it for critical decisions. You understand that when a feature is used to summarize information, the summaries generated may omit details, misinterpret nuance, or fail to capture all key points. You must refer to the original content when precision is required.</li><li><b> 7. Intellectual Property: </b> Zoho does not own or claim copyright over any content generated by its own large language model. You are solely responsible for reviewing any AI-generated content and AI Output to ensure it does not violate third-party rights.</li><li><b> 8. Limitation of Liability: </b> ZOHO MAKES NO GUARANTEES REGARDING THE PERFORMANCE, QUALITY, OR SUITABILITY OF THE AI-GENERATED RESPONSES, AI OUTPUT , OR ZOHO FORMS AI FEATURES. TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL ZOHO OR ITS AFFILIATES, OFFICERS, OR EMPLOYEES BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR GOODWILL, ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF ZOHO FORMS AI FEATURES. THIS INCLUDES, BUT IS NOT LIMITED TO, DAMAGES RESULTING FROM INACCURATE OR HARMFUL INFORMATION PROVIDED BY THE AI, REPUTATIONAL HARM, OR ANY DISPUTE BETWEEN YOU, YOUR CUSTOMER OR ANY OTHER PARTY.</li><li><b> 9. Feedback: </b> If you provide any feedback, suggestions, or comments regarding Zoho Forms AI Feature, you grant Zoho a perpetual, irrevocable, worldwide, royalty-free license to use, reproduce, modify, and incorporate such feedback into any of our products and services without restriction or compensation to you.</li><li><b> 10. Modification and Termination: </b> Zoho reserves the right to modify these AI Terms at any time. We also reserve the right to suspend or terminate your access to Zoho Forms AI Features at any time, for any reason, including for violation of these AI Terms.</li></ul></div><div>By using Zoho Forms and its AI features, you indicate that you have read and understood these terms and agree to comply with them.</div></div></div><div class="popNewFooter"><button class="btnCurve greenBtnNew" elname="okButton">
+<em class="newBtnLoader" style="display: none;"></em>
+Proceed
+</button></div></div></div><div style="display: none; z-index:99999" class="dim-div" id="chatBarInfoPopup"><div style="width:450px; z-index:9999" class="informationWrapper" id="chatBarInfoPopupCont"><div class="popupHeaderWrapper infoPopupDiv"><div class="infoIconCommon flLeft"><svg class="icon"><use xlink:href="#icon-info-thin"></use></svg></div><h3 class="flLeft">Info</h3>
+<div class="clearBoth"></div></div><div class="popupContainerWrapper"><p class="statusCont">To perform this action, please enable the Chatbar. </p>
+<p class="statusCont">
+<b>Click</b>
+<b class="bold">Profile picture</b>
+<em>&rarr;</em>
+<b class="bold">Turn on Chatbar</b>
+</p></div><div class="popupFotterWrapper"><button elname="entries-cnt-info-a" class="blue btnCurve" onclick="hideChatBarInfoPopup();">OK</button></div></div></div><div class="popNewOverlay1 screenFreeze" id="screenFreezeDiv" style="display:none"></div>
+<div class="screenSize"><div class="notFoundCont"><img class="notFoundIcon" src="https://static.zohocdn.com/forms/images/spacer.325472601571f31e1bf00674c368d335.gif" />
+<p>Sorry! Access Denied.</p>
+<span>Click <a href="javascript:;" onclick="previousPage();">here </a> to go back.</span></div></div></body></html>
